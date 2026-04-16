@@ -1,0 +1,123 @@
+{
+  "derives": {
+    "prefix": "derives",
+    "body": [
+      "#[derive(Debug, PartialEq, Clone$1)]"
+    ],
+    "description": "Common derives for a type"
+  },
+  "let else": {
+    "prefix": "let else",
+    "body": [
+      "let ${1:Some}(${2:name}) = ${3:value} else {",
+      "\treturn;",
+      "};"
+    ]
+  },
+  "component": {
+    "prefix": "mkcmp",
+    "body": [
+      "#[derive(Component, Reflect, PartialEq, Debug, Clone$1)]",
+      "#[reflect(Component)]$0"
+    ],
+    "description": "A Bevy component"
+  },
+  "component-no-reflection": {
+    "prefix": "mkcmpnr",
+    "body": [
+      "#[derive(Component, PartialEq, Debug, Clone$1)]$0"
+    ],
+    "description": "A Bevy component without Reflect"
+  },
+  "component-optional-reflection": {
+    "prefix": "mkcmpor",
+    "body": [
+      "#[derive(Component, PartialEq, Debug, Clone$1)]$0",
+      "#[cfg_attr(feature = \"reflect\", derive(bevy_reflect::Reflect))]",
+      "#[cfg_attr(feature = \"reflect\", reflect(Component))]$0"
+    ],
+    "description": "A Bevy component with Reflect gated by a 'reflect' feature"
+  },
+  "marker": {
+    "prefix": "mkmark",
+    "body": [
+      "#[derive(Component, Reflect, PartialEq, Debug, Default, Clone, Copy)]",
+      "#[reflect(Component)]$0"
+    ],
+    "description": "A Bevy marker component"
+  },
+  "resource": {
+    "prefix": "mkres",
+    "body": [
+      "#[derive(Resource, Reflect, PartialEq, Debug, Clone$1)]",
+      "#[reflect(Resource)]$0"
+    ],
+    "description": "A Bevy resource"
+  },
+  "message": {
+    "prefix": "mkmsg",
+    "body": [
+      "#[derive(Message, Reflect, PartialEq, Debug, Clone$1)]",
+      "#[reflect(Message)]$0"
+    ],
+    "description": "A Bevy message"
+  },
+  "event": {
+    "prefix": "mkevt",
+    "body": [
+      "#[derive(Event, Reflect, PartialEq, Debug, Clone$1)]",
+      "#[reflect(Event)]$0"
+    ],
+    "description": "A Bevy event"
+  },
+  "optional-reflect": {
+    "prefix": "optreflect",
+    "body": [
+      "#[cfg_attr(feature = \"reflect\", derive(bevy_reflect::Reflect))]",
+      "#[cfg_attr(feature = \"reflect\", reflect($1))]$0"
+    ],
+    "description": "A Reflect derive gated by a 'reflect' feature"
+  },
+  "observer": {
+    "prefix": "mkobs",
+    "body": [
+      "#[auto_observer(plugin = Plugin)]",
+      "fn ${2:name}(ev: On<${3:Event}>$4) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "A Bevy observer"
+  },
+  "system": {
+    "prefix": "mksys",
+    "body": [
+      "#[auto_system(plugin = plugin, schedule = ${1:Schedule})]",
+      "fn ${2:name}($3) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "A Bevy system using bevy_auto_plugin"
+  },
+  "plugin": {
+    "prefix": "mkplug",
+    "body": [
+      "#[derive(AutoPlugin)]",
+      "#[auto_plugin(impl_plugin_trait)]",
+      "pub(super) struct Plugin;"
+    ],
+    "description": "A Bevy plugin using bevy_auto_plugin"
+  },
+  "plugfn": {
+    "prefix": "mkplugfn",
+    "body": [
+      "#[derive(AutoPlugin)]",
+      "pub(super) struct Plugin;",
+      "",
+      "#[auto_plugin(plugin = Plugin)]",
+      "fn plugin(app: &mut App) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "A Bevy plugin function using bevy_auto_plugin"
+  }
+}
