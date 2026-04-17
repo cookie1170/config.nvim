@@ -13,6 +13,8 @@ rtp:prepend(lazypath)
 
 require('lazy').setup {
   spec = {
+    -- TODO: Read everything in lua/plugins/ and import that instead
+
     -- Import the plugins from lua/plugins
     { import = 'plugins' },
     -- from plugins/lsp
