@@ -1,0 +1,53 @@
+return { -- Collection of various small independent plugins/modules
+  'nvim-mini/mini.nvim',
+  config = function()
+    -- Better Around/Inside textobjects
+    --
+    --  - va)  - [V]isually select [A]round [)]paren
+    --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+    --  - ci'  - [C]hange [I]nside [']quote
+    require('mini.ai').setup { n_lines = 500 }
+
+    -- Add/delete/replace surroundings (brackets, quotes, etc.)
+    --
+    -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+    -- - sd'   - [S]urround [D]elete [']quotes
+    -- - sr)'  - [S]urround [R]eplace [)] [']
+    require('mini.surround').setup()
+
+    -- Adds extra operators
+    --
+    -- - g=  - Evaluate lua  and replace with output
+    -- - gxx - Exchange lines
+    require('mini.operators').setup()
+
+    -- Jump to a word (<CR>)
+    require('mini.jump2d').setup()
+
+    -- Special key  mappings
+    --
+    -- - <Tab>   - Increase indent (when on indent)
+    -- - <S-Tab> - Decrease indent (when on indent)
+    -- - <BS>    - Hungry backspace - remove all whitespace on backspace
+    local map = require('mini.keymap').map_multistep
+    map('i', '<Tab>', { 'increase_indent' })
+    map('i', '<S-Tab>', { 'decrease_indent' })
+    map('i', '<BS>', { 'hungry_bs' })
+
+    -- Simple and easy statusline.
+    --  You could remove this setup call if you don't like it,
+    --  and try some other statusline plugin
+    local statusline = require 'mini.statusline'
+    -- set use_icons to true if you have a Nerd Font
+    statusline.setup { use_icons = vim.g.have_nerd_font }
+
+    -- You can configure sections in the statusline by overriding their
+    -- default behavior. For example, here we set the section for
+    -- cursor location to LINE:COLUMN
+    ---@diagnostic disable-next-line: duplicate-set-field
+    statusline.section_location = function() return '%2l:%-2v' end
+
+    -- ... and there is more!
+    --  Check out: https://github.com/nvim-mini/mini.nvim
+  end,
+}
