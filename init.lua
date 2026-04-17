@@ -10,73 +10,68 @@ vim.g.have_nerd_font = true
 -- [[ Setting options ]]
 
 -- Make line numbers default
-vim.o.number = true
+vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
-vim.o.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
+vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
 -- Enable undo/redo changes even after closing and reopening a file
-vim.o.undofile = true
+vim.opt.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'yes'
+vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-guide-options`
-vim.o.list = true
+vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
+vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.o.cursorline = true
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.opt.scrolloff = 10
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
-vim.o.confirm = true
+vim.opt.confirm = true
 
 -- Set the font and font size for Neovide to use
-vim.o.guifont = 'JetBrains Mono:h10'
+vim.opt.guifont = 'Source Code Pro:h11'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -520,6 +515,20 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
 
+        rust_analyzer = {}, -- Rust
+
+        tombi = {}, -- Toml
+
+        wgsl_analyzer = {}, -- WGSL/WESL
+
+        ['json-lsp'] = {},
+
+        ['just-lsp'] = {}, -- Just (command runner)
+
+        superhtml = {}, -- HTML
+
+        fish_lsp = {}, -- Fish scripts
+
         stylua = {}, -- Used to format Lua code
 
         -- Special Lua Config, as recommended by neovim help docs
@@ -745,17 +754,6 @@ require('lazy').setup({
     opts = {
       pre_hook = function() require('nvim-autopairs').disable() end,
       post_hook = function() require('nvim-autopairs').enable() end,
-      custom_key_maps = {
-        { 'n', { '<A-k>', '<A-Up>' }, function() MiniMove.move_line 'up' end },
-        { 'n', { '<A-j>', '<A-Down>' }, function() MiniMove.move_line 'down' end },
-        { 'n', { '<A-h>', '<A-Left>' }, function() MiniMove.move_line 'left' end },
-        { 'n', { '<A-l>', '<A-Right>' }, function() MiniMove.move_line 'right' end },
-
-        { 'x', { '<A-k>', '<A-Up>' }, function() MiniMove.move_selection 'up' end },
-        { 'x', { '<A-j>', '<A-Down>' }, function() MiniMove.move_selection 'down' end },
-        { 'x', { '<A-h>', '<A-Left>' }, function() MiniMove.move_selection 'left' end },
-        { 'x', { '<A-l>', '<A-Right>' }, function() MiniMove.move_selection 'right' end },
-      },
     },
     keys = {
       { '<C-j>', '<Cmd>MultipleCursorsAddDown<CR>', mode = { 'n', 'x' }, desc = 'Add cursor and move down' },
@@ -785,12 +783,14 @@ require('lazy').setup({
         '<leader>tt',
         ':FloatermToggle<CR>',
         desc = '[T]oggle a floating [T]erminal',
+        silent = true,
       },
       {
         '<Esc><Esc>',
         '<C-\\><C-n>:FloatermKill<CR>',
         desc = 'Exit floating terminal',
         mode = 't',
+        silent = true,
       },
     },
   },
@@ -814,6 +814,7 @@ require('lazy').setup({
         '<leader>n',
         ':Neotree<CR>',
         desc = 'Focus [n]eo-tree',
+        silent = true,
       },
     },
   },
@@ -831,17 +832,15 @@ require('lazy').setup({
     'fedepujol/move.nvim',
     keys = {
       -- Normal Mode
-      { '<A-j>', ':MoveLine(1)<CR>', desc = 'Move Line Up' },
-      { '<A-k>', ':MoveLine(-1)<CR>', desc = 'Move Line Down' },
-      { '<A-h>', ':MoveHChar(-1)<CR>', desc = 'Move Character Left' },
-      { '<A-l>', ':MoveHChar(1)<CR>', desc = 'Move Character Right' },
-      { '<leader>wh', ':MoveWord(-1)<CR>', mode = { 'n' }, desc = 'Move Word Left' },
-      { '<leader>wl', ':MoveWord(1)<CR>', mode = { 'n' }, desc = 'Move Word Right' },
+      { '<A-j>', function() require('move.core.vert').moveLine(1, false) end, mode = { 'n', 'i' }, desc = 'Move Line Up' },
+      { '<A-k>', function() require('move.core.vert').moveLine(-1, false) end, mode = { 'n', 'i' }, desc = 'Move Line Down' },
+      { '<A-h>', function() require('move.core.horiz').horzWord(-1) end, mode = { 'n', 'i' }, desc = 'Move Word Left' },
+      { '<A-l>', function() require('move.core.horiz').horzWord(1) end, mode = { 'n', 'i' }, desc = 'Move Word Right' },
       -- Visual Mode
-      { '<A-j>', ':MoveBlock(1)<CR>', mode = { 'v' }, desc = 'Move Block Up' },
-      { '<A-k>', ':MoveBlock(-1)<CR>', mode = { 'v' }, desc = 'Move Block Down' },
-      { '<A-h>', ':MoveHBlock(-1)<CR>', mode = { 'v' }, desc = 'Move Block Left' },
-      { '<A-l>', ':MoveHBlock(1)<CR>', mode = { 'v' }, desc = 'Move Block Right' },
+      { '<A-j>', ':MoveBlock(1)<CR>', mode = { 'v' }, desc = 'Move Block Up', silent = true },
+      { '<A-k>', ':MoveBlock(-1)<CR>', mode = { 'v' }, desc = 'Move Block Down', silent = true },
+      { '<A-h>', ':MoveHBlock(-1)<CR>', mode = { 'v' }, desc = 'Move Block Left', silent = true },
+      { '<A-l>', ':MoveHBlock(1)<CR>', mode = { 'v' }, desc = 'Move Block Right', silent = true },
     },
     opts = {
       line = {
