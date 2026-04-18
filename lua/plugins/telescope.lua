@@ -2,7 +2,6 @@ return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     enabled = true,
-    event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -23,6 +22,7 @@ return {
 
       { 'jvgrootveld/telescope-zoxide' },
     },
+    lazy = false,
     config = function()
       local z_utils = require 'telescope._extensions.zoxide.utils'
 
