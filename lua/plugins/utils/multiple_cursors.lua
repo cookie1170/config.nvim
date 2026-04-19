@@ -1,6 +1,7 @@
 return { -- Multiple cursors
   'brenton-leighton/multiple-cursors.nvim',
   opts = {
+    -- Incompatible with nvim-autopairs
     pre_hook = function() require('nvim-autopairs').disable() end,
     post_hook = function() require('nvim-autopairs').enable() end,
   },

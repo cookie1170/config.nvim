@@ -37,7 +37,7 @@ return {
       },
     },
     keys = {
-      { '<C-h>', ':WhichKey<CR>', silent = true, mode = { 'n', 'v', 'i' } },
+      { '<C-?>', ':WhichKey<CR>', silent = true, mode = { 'n', 'v', 'i' } },
     },
   },
 

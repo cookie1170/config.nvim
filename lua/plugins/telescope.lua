@@ -22,7 +22,6 @@ return {
 
       { 'jvgrootveld/telescope-zoxide' },
     },
-    lazy = false,
     config = function()
       local z_utils = require 'telescope._extensions.zoxide.utils'
 
