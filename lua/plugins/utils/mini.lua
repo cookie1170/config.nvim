@@ -24,6 +24,9 @@ return { -- Collection of various small independent plugins/modules
     -- Jump to a word (<CR>)
     require('mini.jump2d').setup()
 
+    -- Move lines
+    require('mini.move').setup()
+
     -- Special key  mappings
     --
     -- - <Tab>   - Increase indent (when on indent)
