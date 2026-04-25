@@ -55,7 +55,10 @@ return {
           --   end,
           -- },
         },
-        opts = {},
+        config = function()
+          require('luasnip').setup()
+          require('luasnip.loaders.from_vscode').lazy_load { paths = { './snippets' } }
+        end,
       },
     },
     ---@module 'blink.cmp'
