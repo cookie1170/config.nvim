@@ -87,7 +87,7 @@ return {
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<CR>', { desc = '[S]earch [T]odos', silent = true })
-      vim.keymap.set('n', '<C-c>', require('telescope').extensions.zoxide.list, { desc = '[C]hange directory', silent = true })
+      vim.keymap.set('n', '<leader>sD', require('telescope').extensions.zoxide.list, { desc = '[S]earch [D]irectories', silent = true })
 
       -- This runs on LSP attach per buffer (see main LSP attach function in 'neovim/nvim-lspconfig' config for more info,
       -- it is better explained there). This allows easily switching between pickers if you prefer using something else!
@@ -116,7 +116,7 @@ return {
 
           -- Fuzzy find all the symbols in your current document.
           -- Symbols are things like variables, functions, types, etc.
-          map('gO', builtin.lsp_document_symbols, 'Open document [O]utline')
+          map('go', builtin.lsp_document_symbols, 'Open document [O]utline')
 
           -- Fuzzy find all the symbols in your current workspace.
           -- Similar to document symbols, except searches over your entire project.
