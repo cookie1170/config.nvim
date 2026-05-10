@@ -72,6 +72,28 @@ return {
     },
   },
 
+  { -- A session manager
+    'olimorris/persisted.nvim',
+    cmd = { 'Persisted' },
+    event = 'BufReadPre', -- Ensure the plugin loads only when a buffer has been loaded
+    config = function()
+      require('persisted').setup()
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'PersistedSavePre',
+        callback = function()
+          -- Close all snacks picker buffers (such as the explorer) as they mess with the saving
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            local filetype = vim.bo[buf].filetype
+            if filetype == 'snacks_layout_box' or filetype == 'snacks_picker_input' or filetype == 'snacks_picker_list' then
+              vim.api.nvim_buf_delete(buf, { force = true })
+            end
+          end
+        end,
+      })
+    end,
+  },
+
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter',

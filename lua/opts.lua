@@ -7,8 +7,6 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
--- [[ Setting options ]]
-
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -78,3 +76,6 @@ vim.opt.confirm = true
 
 -- Set the font and font size for Neovide to use
 vim.opt.guifont = 'Source Code Pro:h11'
+-- Tweak the cursor animation in neovide a bit
+vim.g.neovide_cursor_animation_length = 0.1
+vim.g.neovide_cursor_trail_size = 0.75

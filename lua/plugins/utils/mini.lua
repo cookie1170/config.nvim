@@ -27,6 +27,7 @@ return { -- Collection of various small independent plugins/modules
     -- Move lines
     require('mini.move').setup()
 
+    -- A snippet engine
     local loader = require('mini.snippets').gen_loader
     require('mini.snippets').setup {
       snippets = {
