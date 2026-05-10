@@ -2,16 +2,15 @@ return {
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
-    cmd = { 'ConformInfo', 'FormatDisable', 'FormatEnable' },
+    cmd = { 'ConformInfo', 'FormatDisable', 'FormatEnable', 'FormatToggle' },
     keys = {
       {
-        '<leader>f',
-        function() require('conform').format { async = true } end,
-        mode = '',
-        desc = '[F]ormat buffer',
+        '<leader>tf',
+        ':FormatToggle<CR>',
+        desc = '[T]oggle [F]ormat-on-save',
+        silent = true,
       },
     },
-    ---@module 'conform'
     config = function()
       require('conform').setup {
 
@@ -42,12 +41,25 @@ return {
         desc = 'Disable autoformat-on-save',
         bang = true,
       })
+
       vim.api.nvim_create_user_command('FormatEnable', function()
         vim.b.disable_autoformat = false
         vim.g.disable_autoformat = false
       end, {
         desc = 'Re-enable autoformat-on-save',
       })
+
+      vim.api.nvim_create_user_command('FormatToggle', function(args)
+        if vim.b.disable_autoformat or vim.g.disable_autoformat then
+          vim.cmd 'FormatEnable'
+        else
+          if args.bang then
+            vim.cmd 'FormatDisable!'
+          else
+            vim.cmd 'FormatDisable'
+          end
+        end
+      end, { desc = 'Toggle autoformat-on-save', bang = true })
     end,
   },
 

@@ -41,27 +41,26 @@ return {
         end, { desc = 'Previous change' })
 
         -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[S]tage hunk' })
-        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[R]eset hunk' })
+        map('n', '<leader>gs', gitsigns.stage_hunk, { desc = '[G]it: [S]tage hunk' })
+        map('n', '<leader>gr', gitsigns.reset_hunk, { desc = '[G]it: [R]eset hunk' })
 
-        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[S]tage hunk' })
+        map('v', '<leader>gs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[G]it: [S]tage hunk' })
 
-        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[R]eset hunk' })
+        map('v', '<leader>gr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[G]it: [R]eset hunk' })
 
-        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
-        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
-        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[P]review hunk' })
-        map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'Preview hunk [I]nline' })
+        map('n', '<leader>gS', gitsigns.stage_buffer, { desc = '[G]it: [S]tage buffer' })
+        map('n', '<leader>gR', gitsigns.reset_buffer, { desc = '[G]it: [R]eset buffer' })
+        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = '[G]it: [P]review hunk' })
+        map('n', '<leader>gI', gitsigns.preview_hunk_inline, { desc = '[G]it: Preview hunk [I]nline' })
 
-        map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end, { desc = '[B]lame line' })
-        map('n', '<leader>hB', gitsigns.blame, { desc = 'Open [B]lame' })
+        map('n', '<leader>gb', function() gitsigns.blame_line { full = true } end, { desc = '[G]it: [B]lame line' })
+        map('n', '<leader>gB', gitsigns.blame, { desc = '[G]it: Open [B]lame' })
 
-        map('n', '<leader>hd', gitsigns.diffthis, { desc = '[D]iff this' })
+        map('n', '<leader>gd', gitsigns.diffthis, { desc = '[G]it: [D]iff this' })
+        map('n', '<leader>gD', function() gitsigns.diffthis '~' end, { desc = '[G]it: [D]iff parent' })
 
-        map('n', '<leader>hD', function() gitsigns.diffthis '~' end, { desc = '[D]iff parent' })
-
-        map('n', '<leader>hq', gitsigns.setqflist, { desc = '[Q]uickfix list' })
-        map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = '[Q]uickfix list all' })
+        map('n', '<leader>gq', gitsigns.setqflist, { desc = '[G]it: [Q]uickfix list' })
+        map('n', '<leader>gQ', function() gitsigns.setqflist 'all' end, { desc = '[G]it: [Q]uickfix list all' })
 
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle line [B]lame' })
@@ -88,7 +87,8 @@ return {
       spec = {
         { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+        { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
+        { '<leader>gh', group = '[G]it[H]ub', mode = { 'n' } },
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
