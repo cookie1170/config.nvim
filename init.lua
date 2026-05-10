@@ -1,11 +1,14 @@
--- Options
+-- enable faster startup by caching compiled lua modules
+vim.loader.enable()
+
+-- options
 require 'opts'
 
--- Keymap
+-- keymap
 require 'keymap'
 
--- Miscellanious changes
+-- miscellanious changes
 require 'misc'
 
--- Installs and sets up lazy.nvim
-require 'setup_lazy'
+-- adds some global utility functions
+require 'utils'
