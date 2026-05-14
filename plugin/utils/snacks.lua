@@ -23,6 +23,25 @@ require('snacks').setup {
     enabled = true,
     timeout = 3000,
   },
+  scratch = { -- scratch buffers
+    enabled = true,
+    win_by_ft = {
+      lua = {
+        keys = {
+          ['source'] = { -- evaluate lua code with <C-CR>
+            '<C-CR>',
+            function(self)
+              local name = 'scratch.' .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ':e')
+              Snacks.debug.run { buf = self.buf, name = name }
+            end,
+            desc = 'Source buffer',
+            mode = { 'n', 'x' },
+          },
+        },
+      },
+    },
+  },
+
   dashboard = { -- a dashboard at startup
     enabled = true,
     preset = {
@@ -47,5 +66,7 @@ require('snacks').setup {
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File [E]xplorer' })
 vim.keymap.set('n', '<leader>ghi', function() Snacks.picker.gh_issue() end, { desc = '[G]it[H]ub [I]ssues (open)' })
 vim.keymap.set('n', '<leader>ghI', function() Snacks.picker.gh_issue { state = 'all' } end, { desc = '[G]it[H]ub [I]ssues (all)' })
-vim.keymap.set('n', '<leader>ghp', function() Snacks.picker.gh_pr() end, { desc = '[G]it[H]ub [P]ull Requests (open)' })
-vim.keymap.set('n', '<leader>ghP', function() Snacks.picker.gh_pr { state = 'all' } end, { desc = '[G]it[H]ub [P]ull Requests (all)' })
+vim.keymap.set('n', '<leader>ghp', function() Snacks.picker.gh_pr() end, { desc = '[G]it[H]ub [P]ull requests (open)' })
+vim.keymap.set('n', '<leader>ghP', function() Snacks.picker.gh_pr { state = 'all' } end, { desc = '[G]it[H]ub [P]ull requests (all)' })
+vim.keymap.set('n', '<leader>ts', function() Snacks.scratch() end, { desc = '[T]oggle [S]cratch buffer' })
+vim.keymap.set('n', '<leader>sS', function() Snacks.scratch.select() end, { desc = '[S]earch [S]cratch buffer' })
