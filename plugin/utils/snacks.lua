@@ -47,13 +47,13 @@ require('snacks').setup {
     preset = {
       pick = 'Telescope',
       keys = {
-        { icon = ' ', key = 'f', desc = 'Find [F]ile', action = ':Telescope find_files' },
+        { icon = ' ', key = 'f', desc = 'Find [F]ile', action = ':Telescope find_files' },
         { icon = '󰥨 ', key = 'd', desc = 'Find [D]irectory', action = ":lua require('telescope').extensions.zoxide.list()" },
         { icon = ' ', key = 'n', desc = '[N]ew File', action = ':ene | startinsert' },
         { icon = ' ', key = 'r', desc = '[R]ecent Files', action = ':Telescope oldfiles' },
-        { icon = ' ', key = 'c', desc = '[C]onfig', action = ":lua require('telescope.builtin').find_files({ cwd = vim.fn.stdpath 'config' })" },
+        { icon = ' ', key = 'c', desc = '[C]onfig', action = ":lua require('telescope.builtin').find_files({ cwd = vim.fn.stdpath 'config' })" },
         { icon = ' ', key = 's', desc = 'Restore [S]ession', action = ':Persisted load_last' },
-        { icon = ' ', key = 'q', desc = '[Q]uit', action = ':qa' },
+        { icon = ' ', key = 'q', desc = '[Q]uit', action = ':qa' },
       },
     },
     sections = {

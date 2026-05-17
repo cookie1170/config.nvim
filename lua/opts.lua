@@ -1,4 +1,4 @@
--- set <space> as the leader key
+-- set <space> as the leader ke
 -- see `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -71,7 +71,7 @@ vim.opt.confirm = true
 
 -- neovide (vim gui) options
 -- set the font and font size
-vim.opt.guifont = 'Source Code Pro:h11'
+vim.opt.guifont = 'SauceCodePro Nerd Font:h11'
 
 -- tweak the cursor animation a bit
 vim.g.neovide_cursor_animation_length = 0.1
